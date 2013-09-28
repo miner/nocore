@@ -1,15 +1,19 @@
 # nocore
 
-A Leiningen template for a Clojure "No Core" style project.  Instead of using the ambiguous
-"core.clj" as your main source file, **nocore** project uses *user-name*/*project-name*.clj.  
+A Leiningen template for a Clojure "No Core" style project.  Instead of using the overloaded name
+"core.clj" as your main source file, a **nocore** project uses *user-name*/*project-name*.clj.  I
+find this style makes it much less confusing to have several projects open in Emacs at the same
+time.
 
-Also, the name of a **nocore** project uses a group-id taken from the user name.
+The project.clj of a **nocore** project always uses a group-id.  The default comes from the user
+name.  You can override the group id by setting the environment variable `LEIN_NOCORE_GROUPID`.  You
+can override the user name by setting the environment variable `LEIN_NOCORE_USER`.
 
 ## Usage
 
 `lein new nocore PROJECT-NAME`
 
-where PROJECT-NAME is the name of your new project.
+where PROJECT-NAME is the simple name of your new project.
 
 ## License
 
