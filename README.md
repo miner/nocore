@@ -2,7 +2,8 @@
 
 A Leiningen template for a **NoCore** style Clojure project.  
 
->  "I think that this situation absolutely requires a really futile and stupid gesture be done on somebody's part."  -- Otter
+>  I think that this situation absolutely requires a really futile and stupid gesture be done 
+>  on somebody's part.  -- Otter
 
 ## Core.clj Considered Harmful
 
@@ -33,8 +34,8 @@ The default main namespace for a NoCore project is `USER.NAME`.  The source file
 `NAME/src/USER/NAME.clj`.  You can overide this with the optional keyword argument `:ns NS`.  If the
 value for `NS` does not end with the segment matching NAME, it will be added automatically.  (That
 is, your main source file always matches your project NAME.)  Normally, the GROUP does not affect
-the default namespace, but.  However, if you use the qualified GROUP/NAME form for the project name,
-the GROUP will be part of the default namespace, which is GROUP.NAME in this special case.
+the default namespace.  However, if you use the qualified GROUP/NAME form for the project name,
+the GROUP will be part of the default namespace, which becomes `GROUP.NAME` in this special case.
 
 The default test namespace is derived from the main namespace with a "test-" prefix inserted before
 the last element.  If your main namespace is `com.example.jmc`, the test namespace will be
@@ -42,11 +43,11 @@ the last element.  If your main namespace is `com.example.jmc`, the test namespa
 naming pattern rather than `NAME_test.clj`.  I think it's easier to bounce back and forth between
 the main file and the test file that way.  Admittedly, that's just a matter of personal preference.
 
-All NoCore projects have a group ID to help avoid project name clashes.  The default GROUP is the
-USER.  You can override the default with the keyword argument `:group GROUP`.  The GROUP is used
-only for the Group-ID in the `defproject` name.  As mentioned above, you can also specify the
-GROUP/NAME as the project name, which defines assigns the GROUP and the main namespace at the same
-time.
+All **NoCore** projects have a group ID to help avoid project name clashes.  The default GROUP is
+the USER.  You can override the default with the keyword argument `:group GROUP`.  Normally, the
+GROUP is used only for the Group-ID in the `defproject` name.  As mentioned above, there is one
+specail case: you can specify the GROUP/NAME form as the project name, which defines the
+GROUP and the main namespace at the same time.
 
 If you own a domain, the Java-style reverse domain name (such as "com.example") is the best choice
 for a GROUP.  In my humble opinion, a Github user name makes a reasonably unique GROUP so that is
@@ -63,7 +64,7 @@ anything.  Just choose a name for your project.
 where NAME is the simple name of your new project.
 
 As with the `default` template, you can optionally use a qualified project name.  In that case, the
-project name is combined as one argument in the form GROUP/NAME (joined with a slash).
+project name is combined as one argument in the form GROUP/NAME (joined with a literal slash).
 
 `lein new nocore GROUP/NAME`
 
@@ -78,7 +79,7 @@ Optional keyword arguments may be used to override the default values for :name,
 where you choose your values for NAME, USER, GROUP and NS.
 
 Note that `lein new` requires the project name argument even if you decide to override it with a
-:name keyword argument.  It may seem strange to override the :name, but it can be more convenient if
+:name keyword argument.  It may seem strange to override the :name, but it can be convenient if
 you want to use `nocore` in a lein alias.
 
 ## License
