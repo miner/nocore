@@ -46,7 +46,7 @@ the main file and the test file that way.  Admittedly, that's just a matter of p
 All **NoCore** projects have a group ID to help avoid project name clashes.  The default GROUP is
 the USER.  You can override the default with the keyword argument `:group GROUP`.  Normally, the
 GROUP is used only for the Group-ID in the `defproject` name.  As mentioned above, there is one
-specail case: you can specify the GROUP/NAME form as the project name, which defines the
+special case: you can specify the GROUP/NAME form as the project name, which defines the
 GROUP and the main namespace at the same time.
 
 If you own a domain, the Java-style reverse domain name (such as "com.example") is the best choice
@@ -71,10 +71,10 @@ project name is combined as one argument in the form GROUP/NAME (joined with a l
 Optional keyword arguments may be used to override the default values for :name, :user, :group, and
 :ns (the main namespace).  You can use any combination of these optional keyword arguments.
 
-`lein new nocore NAME :user USER`
-`lein new nocore NAME :group GROUP`
-`lein new nocore NAME :ns NS`
-`lein new nocore ignored :user USER :group GROUP :ns NS :name NAME`
+- `lein new nocore NAME :user USER`
+- `lein new nocore NAME :group GROUP`
+- `lein new nocore NAME :ns NS`
+- `lein new nocore ignored :user USER :group GROUP :ns NS :name NAME`
 
 where you choose your values for NAME, USER, GROUP and NS.
 
