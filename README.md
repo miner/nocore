@@ -1,20 +1,74 @@
-# nocore
+# NoCore
 
-A Leiningen template for a Clojure "No Core" style project.  Instead of using the overloaded name
-"core.clj" as your main source file, a **nocore** project uses `USER-NAME/PROJECT-NAME.clj`.  For
-example, my project foo would have its main source file: `miner/foo.clj`.  I find this style makes
-it much less confusing to have several projects open in Emacs at the same time.
+A Leiningen template for a **NoCore** style Clojure project.  
 
-The project.clj of a **nocore** project always uses a group-id.  The default comes from the user
-name.  You can override the group id by setting the environment variable `LEIN_NOCORE_GROUPID`.  You
-can override the user name by setting the environment variable `LEIN_NOCORE_USER`.  It probably
-makes sense to have them match your github account.
+>  "I think that this situation absolutely requires a really futile and stupid gesture be done on somebody's part."  -- Otter
+
+## Core.clj Considered Harmful
+
+In my humble opinion, the proliferation of "core.clj" files across the Clojure universe is
+pointless.  It's fine for the Clojure language to define a "core" but there's no need to add "core"
+to every library.  In particular, I find it tedious to have lots of "core.clj" files open in Emacs.
+
+The "core" convention is perpetuated by the Leiningen "default" template.  That's an unfortunate
+accident of history.  However, Leiningen makes it fairly easy to use a custom template for new
+projects so that's what I did.  You're welcome to use "nocore" or make your own modified version and
+share it with the world.
+
+## NoCore Convention
+
+The **NoCore** style involves four values: NAME, USER, GROUP, and NS.  (We're using the all-capital
+terms as placeholder values in this document.)
+
+As usual, the Leiningen `new` command takes a template ("nocore" is our focus here) and a NAME for
+the new project.  A new project directory, named NAME, will be created.
+
+`lein new nocore NAME`
+
+The default USER is taken from the Java property "user.name".  You can overide this with the
+optional keyword argument `:user USER`.  You might want to use your Github account name if it's
+different than your login name.
+
+The default main namespace for a NoCore project is `USER.NAME`.  The source file is
+`NAME/src/USER/NAME.clj`.  You can overide this with the optional keyword argument `:ns NS`.  If the
+value for `NS` does not end with the segment matching NAME, it will be added automatically.  (That
+is, your main source file always matches your project NAME.)
+
+The default test namespace is derived from the main namespace with a "test-" prefix inserted before
+the last element.  If your main namespace is `com.example.jmc`, the test namespace will be
+`com.example.test-jmc`.  I find it convenient to have my test files follow the `test_NAME.clj`
+naming pattern rather than `NAME_test.clj`.  I think it's easier to bounce back and forth between
+the main file and the test file that way.  Admittedly, that's just a matter of personal preference.
+
+All NoCore projects have a group ID to help avoid project name clashes.  The default GROUP is the
+USER.  You can override the default with the keyword argument `:group GROUP`.  The GROUP is used
+only for the Group-ID in the `defproject` name, and does not affect the main namespace.  If
+you own a domain, the Java-style reverse domain name (such as "com.example") is the best choice for
+a GROUP.  In my humble opinion, a Github user name makes a reasonably unique GROUP so that is the
+default.  I contend that it's a better choice than duplicating the project's NAME as its group-id.
 
 ## Usage
 
-`lein new nocore PROJECT-NAME`
+Leiningen 2.0 is smart enough to find project templates on Clojars.org so there's no need to install
+anything.  Just choose a name for your project.
 
-where PROJECT-NAME is the simple name of your new project.
+`lein new nocore NAME`
+
+where NAME is the simple name of your new project.
+
+Optional keyword arguments may be used to override the default values for :name, :user, :group, and
+:ns (the main namespace).  You can use any combination of these optional keyword arguments.
+
+`lein new nocore NAME :user USER`
+`lein new nocore NAME :group GROUP`
+`lein new nocore NAME :ns NS`
+`lein new nocore NAME :user USER :group GROUP :ns NS :name NAME`
+
+where you choose your values for NAME, USER, GROUP and NS.
+
+Note that `lein new` requires the project name argument even if you decide to override it with a
+:name keyword argument.  It may seem strange to override the :name, but it can be more convenient if
+you want to use `nocore` in a lein alias.
 
 ## License
 

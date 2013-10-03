@@ -1,4 +1,4 @@
-(defproject {{groupid}}/{{name}} "0.1.0-SNAPSHOT"
+(defproject {{group}}/{{name}} "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "https://github.com/{{user}}/{{name}}"
   :license {:name "Eclipse Public License"
