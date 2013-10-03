@@ -47,17 +47,26 @@
          (every? true? (take-nth 2 colons))
          (every? false? (take-nth 2 (rest colons))))))
 
-(defn rationalize-ns [main-ns projname user]
-  (if (not main-ns)
-    (str user "." projname)
-    (let [dot (.lastIndexOf main-ns ".")]
-      (if (and (pos? dot) (= projname (subs main-ns (inc dot))))
+(defn rationalize-ns [main-ns name user]
+  ;; main-ns might be nil
+  ;; name might be simple or qualified: com.example/foo
+  ;; If main-ns is given, it is used.  The namespace should end with the last segment given in name
+  ;; so that's added if necessary.  If the main-ns is nil, a namespace is generated from the name.
+  ;; Note that a qualified name causes the group to be part of the namespace.  A simple name
+  ;; causes the namespace to be user.name.  
+  (let [pname (project-name name)
+        group (group-from-name name)]
+    (if main-ns 
+      (let [dot (.lastIndexOf main-ns ".")]
+        (if (and (pos? dot) (= pname (subs main-ns (inc dot))))
           main-ns
-          (str main-ns "." projname)))))
+          (str main-ns "." pname)))
+      (str (or group user) "." pname))))
 
 (defn nocore
   "A general project template for libraries using the NoCore convention.
 Typical usage: `lein new nocore foo`
+Optional group in name: `lein new nocore com.example/foo`
 Optional keyword args can override project name, group ID, user, and namespace:
  `lein new nocore foo :group com.example :user jmc :ns sail.jmc.foo :name foo`"
   [name & kwargs]
@@ -69,7 +78,7 @@ Optional keyword args can override project name, group ID, user, and namespace:
         projname (or kname (project-name name))
         user (or user (getprop "user.name") "unknown")
         group (or group (group-from-name name) user)
-        main-ns (rationalize-ns main-ns projname user)
+        main-ns (rationalize-ns main-ns (or kname name) user)
         data {:group group 
               :user user
               :name projname

@@ -32,7 +32,9 @@ different than your login name.
 The default main namespace for a NoCore project is `USER.NAME`.  The source file is
 `NAME/src/USER/NAME.clj`.  You can overide this with the optional keyword argument `:ns NS`.  If the
 value for `NS` does not end with the segment matching NAME, it will be added automatically.  (That
-is, your main source file always matches your project NAME.)
+is, your main source file always matches your project NAME.)  Normally, the GROUP does not affect
+the default namespace, but.  However, if you use the qualified GROUP/NAME form for the project name,
+the GROUP will be part of the default namespace, which is GROUP.NAME in this special case.
 
 The default test namespace is derived from the main namespace with a "test-" prefix inserted before
 the last element.  If your main namespace is `com.example.jmc`, the test namespace will be
@@ -42,10 +44,14 @@ the main file and the test file that way.  Admittedly, that's just a matter of p
 
 All NoCore projects have a group ID to help avoid project name clashes.  The default GROUP is the
 USER.  You can override the default with the keyword argument `:group GROUP`.  The GROUP is used
-only for the Group-ID in the `defproject` name, and does not affect the main namespace.  If
-you own a domain, the Java-style reverse domain name (such as "com.example") is the best choice for
-a GROUP.  In my humble opinion, a Github user name makes a reasonably unique GROUP so that is the
-default.  I contend that it's a better choice than duplicating the project's NAME as its group-id.
+only for the Group-ID in the `defproject` name.  As mentioned above, you can also specify the
+GROUP/NAME as the project name, which defines assigns the GROUP and the main namespace at the same
+time.
+
+If you own a domain, the Java-style reverse domain name (such as "com.example") is the best choice
+for a GROUP.  In my humble opinion, a Github user name makes a reasonably unique GROUP so that is
+the default.  I contend that it's a better choice than duplicating the project's NAME as its
+group-id.
 
 ## Usage
 
@@ -56,13 +62,18 @@ anything.  Just choose a name for your project.
 
 where NAME is the simple name of your new project.
 
+As with the `default` template, you can optionally use a qualified project name.  In that case, the
+project name is combined as one argument in the form GROUP/NAME (joined with a slash).
+
+`lein new nocore GROUP/NAME`
+
 Optional keyword arguments may be used to override the default values for :name, :user, :group, and
 :ns (the main namespace).  You can use any combination of these optional keyword arguments.
 
 `lein new nocore NAME :user USER`
 `lein new nocore NAME :group GROUP`
 `lein new nocore NAME :ns NS`
-`lein new nocore NAME :user USER :group GROUP :ns NS :name NAME`
+`lein new nocore ignored :user USER :group GROUP :ns NS :name NAME`
 
 where you choose your values for NAME, USER, GROUP and NS.
 
