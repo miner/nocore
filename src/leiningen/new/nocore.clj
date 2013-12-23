@@ -67,8 +67,8 @@
   "A general project template for libraries using the NoCore convention.
 Typical usage: `lein new nocore foo`
 Optional group in name: `lein new nocore com.example/foo`
-Optional keyword args can override project name, group ID, user, and namespace:
- `lein new nocore foo :group com.example :user jmc :ns sail.jmc.foo :name foo`"
+Optional keyword args (after the --) can override project name, group ID, user, and namespace:
+ `lein new nocore foo -- :group com.example :user jmc :ns sail.jmc.foo :name foo`"
   [name & kwargs]
   (when-not (check-kwargs kwargs)
     (throw (IllegalArgumentException. "Improper keyword arguments")))

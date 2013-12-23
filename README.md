@@ -71,16 +71,21 @@ project name is combined as one argument in the form GROUP/NAME (joined with a l
 Optional keyword arguments may be used to override the default values for :name, :user, :group, and
 :ns (the main namespace).  You can use any combination of these optional keyword arguments.
 
-- `lein new nocore NAME :user USER`
-- `lein new nocore NAME :group GROUP`
-- `lein new nocore NAME :ns NS`
-- `lein new nocore ignored :user USER :group GROUP :ns NS :name NAME`
+- `lein new nocore NAME -- :user USER`
+- `lein new nocore NAME -- :group GROUP`
+- `lein new nocore NAME -- :ns NS`
+- `lein new nocore overridden -- :user USER :group GROUP :ns NS :name NAME`
 
 where you choose your values for NAME, USER, GROUP and NS.
 
 Note that `lein new` requires the project name argument even if you decide to override it with a
 :name keyword argument.  It may seem strange to override the :name, but it can be convenient if
-you want to use `nocore` in a lein alias.
+you want to use `nocore` in a lein alias, perhaps to set other defaults and take the name as
+the last argument.
+
+Note that the keyword arguments come after the "--" marker.  Leiningen (around version 2.3.4?)
+apparently now requires the marker to separate lein command keywords from template specific
+ones... or something like that.
 
 ## License
 
