@@ -1,4 +1,4 @@
-(defproject nocore/lein-template "0.4.4"
+(defproject nocore/lein-template "0.4.5"
   :description "Leiningen template for a NoCore Clojure project"
   :url "https://github.com/miner/nocore"
   :license {:name "Eclipse Public License"
